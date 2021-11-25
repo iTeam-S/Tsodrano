@@ -7,25 +7,132 @@
     <title>iteams</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./src/css/bootstrap-3.min.css">
-    <link rel="stylesheet" href="./src/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800&amp;subset=cyrillic-ext,latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="./src/css/flag-icon-css-master/css/flag-icon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./src/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script src="./src/js/data.js"></script>
+    <script src="./src/js/index.js"></script>
 </head>
 
 </head>
 <body>
     <canvas id="canvas"></canvas>
-    <div id="app" class="container-fluid  gasy-content">
+    <style>
+        .card{
+            display: flex;
+            flex-direction: column;
+        }
+        .card_1{
+           display: block;
+           height: 35vh;
+           padding-left: 30px;
+           padding-right: 30px;
+           white-space: wrap;
+        }
+        .card_2{
+            display: block;
+            height: 10vh;
+            width: 100%;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            margin-left: 0px
+        }
+        .rounded_2{
+            border-radius: 15px;
+            cursor: pointer;
+        }
+      
+        .border{
+            border-width: 3px !important;
+            border-color: white
+        }
+        .icon{
+            font-size: 20px;
+        }
+        .card_2 a{
+            text-decoration: none !important; 
+        }
+        .name{
+            font-size: 16px;
+            font-weight: 500
+        }
+        .speciality{
+            font-size: 14px;
+            color:rgb(240, 240, 240);
+            font-style: italic
+        }
+        .aquote{
+            font-size: 40px;
+            font-weight: bolder;
+            text-align: initial
+        }
+        .describe{
+            color: black;
+            text-align: justify;
+            margin-top: 20px;
+            font-weight: 500
+        }
+        </style>
+    <div id="app" class="container-fluid  gasy-content" style="margin: 0px; padding: 0px">
         <div class="text">
+            <div class="custom_carousel">
+                <div class="card rounded_2 shadow bg-white mx-4" v-for="item in Persons" :key="item.id" style="height: 45vh;">
+                   
+                   <div class="card_1">
+                        <p class="aquote" ><i class="fas fa-quote-left text-primary"></i></p>
+                        
+                        <p class="describe">
+                            {{item.desciption}}    
+                        </p>
+                   </div>
+                  
+                   <div class="bg-primary row  card_2">
+                        <div class="col-xs-2 col-md-2 col-lg-2">
+                            <div class="w-22 h-22 rounded-full border  mt-3">
+                                <img class="w-20 h-20 rounded-full"
+                                    src="data:image/jpeg;base64,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" alt="">
+                            </div>
+                            
+                        </div>
+                        <div class="col-xs-8 col-md-8 col-lg-8" style="text-align: initial">
+                            <h5 class="name">
+                                {{item.nom_complet}}
+                            </h5>
+                            <p class="speciality">
+                                {{item.specialite}}
+                            </p>
+                        </div>
+                        <div class="col-xs-2 col-md-2 col-lg-2">
+                            <div class="row" style="margin-top: 4vh">
+                                <div class="col-xs-4 col-md-4 col-lg-4">
+                                    <a :href="item.link_facebook" style="color:white">
+                                        <i class="fab fa-facebook-f icon"></i>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4 col-md-4 col-lg-4">
+                                    <a :href="item.link_linkedin" style="color:white">
+                                        <i class="fab fa-linkedin-in icon"></i>
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
            
   
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    
     <script src="./src/js/jquery-3.3.1.min.js"></script>
     <script src="./src/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./src/js/slick_carrousel.js"></script>
     <script src="./src/js/index_2.js"></script>
-    <script src="./src/js/index.js"></script>
 </body>
 </html>
