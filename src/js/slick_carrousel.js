@@ -10,5 +10,6 @@ $(document).ready(function(){
         speed: 15000,
         cssEase: 'linear',
         autoplaySpeed: autoplaySpeed,
+        pauseOnHover: true,
     });
 });
